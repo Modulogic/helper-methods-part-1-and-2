@@ -4,26 +4,19 @@
   <p style="color: red;"><%= message %></p>
 <% end %>
 
-<form action="<%= movies_path %>" method="post" data-turbo="false">
-  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-
+<%= form_with(model: @movie, data: { turbo: false }) do |form| %>
   <div>
-    <label for="title_box">
-      Title
-    </label>
+    <%= form.label :title %>
 
-    <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
+    <%= form.text_field :title %>
   </div>
 
   <div>
-    <label for="description_box">
-      Description
-    </label>
+    <%= form.label :description %>
 
-    <textarea id="description_box" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+    <%= form.text_area :description, { rows: 3 } %>
   </div>
 
-  <button>
-    Create Movie
-  </button>
+  <%= form.button %>
+<% end %>
 </form>
